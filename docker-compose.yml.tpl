@@ -224,13 +224,13 @@ services:
       PROVIDERS_CASDOOR_CLIENTSECRET: "{{OIDC_AUTH_CLIENT_SECRET}}"
       PROVIDERS_CASDOOR_BASEURL: "{{COSTRICT_BACKEND_BASEURL}}"
       PROVIDERS_CASDOOR_INTERNALURL: "{{OIDC_CASDOOR_ADDR}}"
-      SMS_ENABLEDTEST: true
-      SMS_CLIENTID: 
-      SMS_CLIENTSECRET: 
-      SMS_TOKENURL: 
-      SMS_SENDURL: 
-      SYNCSTAR_ENABLED: false
-      SYNCSTAR_PERSONALTOKEN: 
+      SMS_ENABLEDTEST: "true"
+      SMS_CLIENTID:
+      SMS_CLIENTSECRET:
+      SMS_TOKENURL:
+      SMS_SENDURL:
+      SYNCSTAR_ENABLED: "false"
+      SYNCSTAR_PERSONALTOKEN:
       SYNCSTAR_OWNER: zgsm-ai
       SYNCSTAR_REPO: zgsm
       DATABASE_HOST: postgres
@@ -267,8 +267,8 @@ services:
       MIN_PREFIX_TOKEN: 2000
       COMPLETION_CACHE_TIME: 86400
       CONTINUE_COMPLETION_CACHE_EXPIRED: 30
-      DISABLED_REJECT_AUTHORIZATION: True
-      ENABLE_REDIS: False
+      DISABLED_REJECT_AUTHORIZATION: "True"
+      ENABLE_REDIS: "False"
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_DB: 0
@@ -353,7 +353,7 @@ services:
   cotun:
     image: {{IMAGE_COTUN}}
     restart: always
-    command: ["--reverse", "--port", "8080", "--authfile", "/cotun/users.json"]
+    command: ["server", "--reverse", "--port", "8080", "--authfile", "/cotun/users.json"]
     environment:
       TZ: "Asia/Shanghai"
     volumes:
@@ -385,7 +385,7 @@ services:
       - "{{PORT_HIGRESS_CONTROL}}:8001"
     environment:
       MODE: full
-      O11Y: on
+      O11Y: "on"
       CONFIG_TEMPLATE: ai-gateway
       GATEWAY_HTTP_PORT: 8080
       GATEWAY_HTTPS_PORT: 8443
@@ -433,10 +433,10 @@ services:
     environment:
       TZ: Asia/Shanghai
       discovery.type: single-node
-      bootstrap.memory_lock: true
-      xpack.security.enabled: false
-      xpack.security.http.ssl.enabled: false  # Disable HTTPS
-      xpack.ml.enabled: false
+      bootstrap.memory_lock: "true"
+      xpack.security.enabled: "false"
+      xpack.security.http.ssl.enabled: "false"  # Disable HTTPS
+      xpack.ml.enabled: "false"
       ELASTIC_PASSWORD: "{{PASSWORD_ELASTIC}}"
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     user: "1000:1000"
