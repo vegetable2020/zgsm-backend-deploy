@@ -105,50 +105,7 @@ The CoStrict service deployed through the deployment project provides a default 
 
 When logging in, please select the **"Password"** method to log in
 
-### Issue 2: Account login shows client ID or secret error
-
-**Cause**:
-During deployment, due to system resources or performance issues, the initial record writing to postgres tables failed.
-
-**Solution**:
-1. Access `casdoor` page, click **"Identity Authentication"** to enter the application page
-2. Select the **"Edit"** button in the **"Actions"** column of the record named **"loginApp"** to enter the edit page
-3. Find the client configuration (`Client ID`, `Client Secret`) and modify it with the configuration in the `configure.sh` file in the deployment project directory (`OIDC_AUTH_CLIENT_ID`, `OIDC_AUTH_CLIENT_SECRET`)
-
-**Note**: This method only handles the issue of missing client ID and secret configuration. Other missing initial records in postgres tables may cause other problems.
-
-**Recommendation**:
-> Method 1:
-
-Use a server that meets deployment requirements to redeploy
-
-> Method 2:
-
-Connect to the current backend deployment server, cd to the deployment project directory, compare the SQL file content in `postgres/scripts` with the table records in the `postgres container` and supplement them
-
-### Issue 3: Account login shows callback URL error
-
-**Cause**:
-During deployment, due to system resources or performance issues, the initial record writing to postgres tables failed.
-
-**Solution**:
-
-1. Access `casdoor` page, click **"Identity Authentication"** to enter the application page
-2. Select the **"Edit"** button in the **"Actions"** column of the record named **"loginApp"** to enter the edit page
-3. Find the redirect URLs configuration (`Redirect URLs`) and modify the content to: `http://{COSTRICT_BACKEND}:{PORT_APISIX_ENTRY}/oidc-auth/api/v1/plugin/login/callback`
-
-**Note**: This method only handles the issue of missing callback URL configuration. Other missing initial records in postgres tables may cause other problems.
-
-**Recommendation**:
-> Method 1:
-
-Use a server that meets deployment requirements to redeploy
-
-> Method 2:
-
-Connect to the current backend deployment server, cd to the deployment project directory, compare the SQL file content in `postgres/scripts` with the table records in the `postgres container` and supplement them
-
-### Issue 4: How to add new users
+### Issue 2: How to add new users
 
 **Solution**:
 
@@ -156,7 +113,7 @@ Connect to the current backend deployment server, cd to the deployment project d
 2. Select the **"User"** button in the **"Actions"** column of the record named **"user-group"** to enter the user page of **"user-group"**
 3. Click the **"Add"** button to add new users
 
-### Issue 5: New user login failure
+### Issue 3: New user login failure
 
 **Issue Details**:
 ```
@@ -172,7 +129,7 @@ code:oidc-auth.updateInfoFailed,data:"",message:"update user info fail:faile to 
    - Drop the unique index: `drop index idx_auth_users_github_id;`
 4. After completing the operations, use the new user to log in again in the `CoStrict` plugin
 
-### Issue 6: User authentication expired
+### Issue 4: User authentication expired
 
 **Issue Details**:
 ```
@@ -187,7 +144,7 @@ Expiration time: 11/10/2025, 11:32:55 AM
 
 Click the account avatar in the upper right corner of the CoStrict plugin to enter the account page, and click **"Relogin"** to log in.
 
-### Issue 7: How to modify user authentication validity period
+### Issue 5: How to modify user authentication validity period
 
 **Solution**:
 
@@ -195,7 +152,7 @@ Click the account avatar in the upper right corner of the CoStrict plugin to ent
 2. Select the **"Edit"** button in the **"Actions"** column of the record named **"loginApp"** to enter the edit page
 3. Find the authentication Token expiration configuration (`Access Token expiration`, `Refresh Token expiration`) and modify it
 
-### Issue 8: Account interface webpage access error
+### Issue 6: Account interface webpage access error
 
 **Issue Details**:
 
@@ -209,7 +166,7 @@ For private deployment, quota usage is not involved, so this can be ignored.
 
 ## 6. Model Update Issues
 
-### Issue 1: Chat model updates
+### Issue 1: Chat, CodeReview model updates
 
 **Solution**:
 
@@ -282,15 +239,6 @@ Due to configuration issues in `higress`, some plugins failed to start successfu
 1. Connect to the backend deployment server and enter the `higress` container using docker command
 2. Navigate to the `/var/log/higress` directory and check the `gateway.log` content
 
-### Issue 5: How to configure CoStrict to support image messages for newly added image-capable models
-
-**Solution**:
-
-1. First, ensure the model has image support capability
-2. Access `higress` page, go to **Plugin Configuration -> AI Quota Management**
-3. Click **"Configuration"** to enter the configuration page, select **"YAML View"** to display in yaml format, find the image-capable model configuration in the "providers" configuration item, and modify the "supportsImages" configuration to "true"
-4. After modification, click **Settings -> Provider** in the CoStrict plugin, and click **"Refresh Models"**
-
 ---
 
 ## 7. Conversation Related Errors
@@ -312,7 +260,7 @@ The current error indicates: unable to access the deployed service server. There
 
 **Solution**:
 
-The selected model may support a smaller context length. It is recommended to choose a model that supports **64k+** context.
+The selected model may support a smaller context length. It is recommended to choose a model that supports 64k+ context.
 
 ---
 

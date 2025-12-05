@@ -35,4 +35,9 @@ spec:
     port: 80
     protocol: http
     type: static
+  - domain: {{CODEREVIEW_MODEL_HOST}}
+    name: llm-codereview.internal
+    port: 80
+    protocol: http
+    type: static
 status: {}

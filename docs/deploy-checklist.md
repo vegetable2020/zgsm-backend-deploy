@@ -9,14 +9,16 @@ Used for checking and verifying the preparation before deployment, configuration
 #### 1.1.1 Model GPU Resources (Recommended)
 
 - **Chat Model**: `4 * H20` or `4 * RTX4090`
+- **Code Review Model**: `2 * H20` or `2 * RTX4090`
 - **Completion Model**: `1 * H20` or `1 * RTX4090`
 - **Embedding Model**: `0.5 * H20` or `0.5 * RTX4090`
 - **Rerank Model**: `0.5 * H20` or `0.5 * RTX4090`
 
 #### 1.1.2 Model List (Recommended)
 
-- **Chat Model**: `GLM-4.6-FP8`
-- **Completion Model**: `Qwen3-4B-Instruct-2507`
+- **Chat Model**: `GLM-4.5-FP8`, `GLM-4.5-106B-A12B-FP8`
+- **Code Review Model**: `Qwen2.5-Coder-32B-Instruct`, `Qwen3.0-Coder-30B-A3B-Instruct`
+- **Completion Model**: `DeepSeek-Coder-V2-Lite-Base`
 - **Embedding Model**: `gte-modernbert-baseRAG/Embedding`
 - **Rerank Model**: `gte-reranker-modernbert-baseRAG/Rerank`
 
@@ -33,6 +35,7 @@ Used for checking and verifying the preparation before deployment, configuration
 - [ ] **Model Interfaces**
   
   - [ ] **Chat Model**: `{CHAT_BASEURL}/v1/chat/completions` interface
+  - [ ] **Code Review Model**: `{CODEREVIEW_BASEURL}/v1/chat/completions` interface
   - [ ] **Completion Model**: `{COMPLETION_BASEURL}` interface
   - [ ] **Embedding Model**: `{EMBEDDER_BASEURL}` interface
   - [ ] **Rerank Model**: `{RERANKER_BASEURL}` interface

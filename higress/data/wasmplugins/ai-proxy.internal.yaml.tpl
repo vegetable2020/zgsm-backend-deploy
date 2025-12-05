@@ -51,9 +51,24 @@ spec:
       retryOnFailure:
         enabled: false
       type: openai
+    - failover:
+        enabled: false
+      apiTokens:
+      - {{CODEREVIEW_APIKEY}}
+      id: codereview
+      openaiCustomUrl: {{CODEREVIEW_BASEURL}}/v1
+      openaiExtraCustomUrls: []
+      retryOnFailure:
+        enabled: false
+      type: openai
   defaultConfigDisable: false
   failStrategy: FAIL_OPEN
   matchRules:
+  - config:
+      activeProviderId: codereview
+    configDisable: false
+    service:
+    - llm-codereview.internal.static
   - config:
       activeProviderId: chatrag
     configDisable: false
